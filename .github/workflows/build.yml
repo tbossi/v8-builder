@@ -1,4 +1,4 @@
-name: Build V8 (Linux)
+name: Build V8
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: Build V8 for Linux
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2

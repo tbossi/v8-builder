@@ -33,7 +33,7 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['linux']" >> .gclient
 
-cd ~/v8
+cd ~/v8/v8
 echo "Installing V8 dependencies" # Linux only step
 ./build/install-build-deps.sh --no-syms --no-nacl --no-prompt
 gclient sync
