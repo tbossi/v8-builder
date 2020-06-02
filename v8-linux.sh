@@ -2,7 +2,7 @@ VERSION="8.1.307.31"
 
 echo "Installing system dependencies"
 
-apt-get install -y \
+sudo apt-get install -y \
     pkg-config \
     git \
     subversion \
