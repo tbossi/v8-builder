@@ -1,5 +1,5 @@
 # V8 Builder
-## An automatic [V8 engine](https://v8.dev) builder via Github Actions
+### An automatic [V8 engine](https://v8.dev) builder via Github Actions
 
 Despite the documentation provided by the developers, compiling V8 is complicated and heavy. V8 repository is huge and the time required for downloading and compiling is quite a lot.
 This repository leverages Github Actions to obtain the library binaries for the various platforms in humanly acceptable time.
