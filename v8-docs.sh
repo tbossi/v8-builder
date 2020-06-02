@@ -33,4 +33,4 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 
 cd ~
-doxygen $(dirname "$0")/Doxyfile
+doxygen $GITHUB_WORKSPACE/Doxyfile
