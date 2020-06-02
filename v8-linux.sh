@@ -23,7 +23,7 @@ git config --global color.ui true
 cd ~
 echo "=====[ Getting Depot Tools ]====="	
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-export PATH=${`pwd`}/depot_tools:$PATH
+export PATH=$(pwd)/depot_tools:$PATH
 gclient
 
 mkdir v8
