@@ -27,8 +27,8 @@ jobs:
         path: '~/v8/v8/out.gn/x64.release/*.so'
 
   
-  documentation:
-    name: Documentation
+  headers_and_documentation:
+    name: Headers and Documentation
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
@@ -36,6 +36,10 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         sh ./v8-docs.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_headers_${{ env.V8_VERSION }}
+        path: '~/v8/v8/include'
     - uses: actions/upload-artifact@v2
       with:
         name: v8_documentation_${{ env.V8_VERSION }}
