@@ -3,6 +3,9 @@ name: Build V8
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+    - 'LICENSE'
+    - '**.md'
 
 env:
   V8_VERSION: 8.1.307.31
