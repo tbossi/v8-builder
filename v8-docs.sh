@@ -31,6 +31,8 @@ cd v8
 
 echo "=====[ Fetching V8 ]====="
 fetch v8
+git checkout $VERSION
+
 
 cd ~
 doxygen $GITHUB_WORKSPACE/Doxyfile
