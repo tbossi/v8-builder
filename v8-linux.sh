@@ -1,6 +1,4 @@
-VERSION="8.1.307.31"
-
-echo "Installing system dependencies"
+VERSION=$1
 
 sudo apt-get install -y \
     pkg-config \
@@ -22,22 +20,19 @@ git config --global color.ui true
 
 cd ~
 echo "=====[ Getting Depot Tools ]====="	
-git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+git clone -q https://chromium.googlesource.com/chromium/tools/depot_tools.git
 export PATH=$(pwd)/depot_tools:$PATH
 gclient
+
 
 mkdir v8
 cd v8
 
-echo "=====[ Fetching V8 ]====="	
+echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['linux']" >> .gclient
-
 cd ~/v8/v8
-echo "Installing V8 dependencies" # Linux only step
 ./build/install-build-deps.sh --no-syms --no-nacl --no-prompt
-gclient sync
-
 git checkout $VERSION
 gclient sync
 
@@ -49,9 +44,5 @@ is_component_build = true
 v8_enable_i18n_support = false
 symbol_level = 1
 '
-
 ninja -C out.gn/x64.release -t clean
 ninja -C out.gn/x64.release v8
-cd ..
-
-zip v8-linux.zip -r v8/out.gn/x64.release -i '*.so'

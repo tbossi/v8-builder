@@ -4,19 +4,37 @@ on:
   push:
     branches: [ master ]
 
+env:
+  V8_VERSION: 8.1.307.31
+
 jobs:
-  build:
-    name: Build V8 for Linux
+  
+  build_linux:
+    name: Linux
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-
-    - name: Run
+    - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-linux.sh
-
+        sh ./v8-linux.sh $V8_VERSION
     - uses: actions/upload-artifact@v2
       with:
-        path: '~/v8/v8-linux.zip'
+        name: v8_linux_x86-64_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/x64.release/*.so'
+
+  
+  documentation:
+    name: Documentation
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate documentation
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-docs.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_documentation_${{ env.V8_VERSION }}
+        path: '~/docs'
 
