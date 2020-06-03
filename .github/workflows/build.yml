@@ -82,6 +82,20 @@ jobs:
         name: v8_android_x86_${{ env.V8_VERSION }}
         path: '~/v8/v8/out.gn/ia32.release/*.so'
 
+  build_macos:
+    name: macOS
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-macos.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_macos_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/x64.release/*.dylib'
+
   headers_and_documentation:
     name: Headers and Documentation
     runs-on: ubuntu-18.04
