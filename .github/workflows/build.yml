@@ -26,7 +26,62 @@ jobs:
         name: v8_linux_x86-64_${{ env.V8_VERSION }}
         path: '~/v8/v8/out.gn/x64.release/*.so'
 
+  build_android_arm_v8:
+    name: Android (arm64-v8a)
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-android-arm-v8.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_android_arm64-v8a_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/arm64.release/*.so'
+
+  build_android_arm_v7:
+    name: Android (armeabi-v7a)
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-android-arm-v7.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_android_armeabi-v7a_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/arm.release/*.so'
   
+  build_android_x86_64:
+    name: Android (x86-64)
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-android-x86-64.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_android_x86-64_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/x64.release/*.so'
+
+  build_android_x86:
+    name: Android (x86)
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-android-x86.sh $V8_VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_android_x86_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/ia32.release/*.so'
+
   headers_and_documentation:
     name: Headers and Documentation
     runs-on: ubuntu-18.04
