@@ -11,8 +11,8 @@ cd %HOMEPATH%
 echo "=====[ Getting Depot Tools ]====="
 powershell -command "Invoke-WebRequest https://storage.googleapis.com/chrome-infra/depot_tools.zip -O depot_tools.zip"
 7z x depot_tools.zip -o*
-setx PATH "%HOMEPATH%\depot_tools;%PATH%" /m
-setx DEPOT_TOOLS_WIN_TOOLCHAIN 0 /m
+set PATH=%HOMEPATH%\depot_tools;%PATH%
+set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 gclient
 
 
