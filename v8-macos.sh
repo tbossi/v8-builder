@@ -1,7 +1,7 @@
 VERSION=$1
 
-git config --global user.name "V8 Linux Builder"
-git config --global user.email "v8.linux.builder@localhost"
+git config --global user.name "V8 macOS Builder"
+git config --global user.email "v8.macos.builder@localhost"
 git config --global core.autocrlf false
 git config --global core.filemode false
 git config --global color.ui true

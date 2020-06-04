@@ -12,105 +12,118 @@ env:
 
 jobs:
   
-  build_linux:
-    name: Linux
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-linux.sh $V8_VERSION
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_linux_x86-64_${{ env.V8_VERSION }}
-        path: '~/v8/v8/out.gn/x64.release/*.so'
+  # build_linux:
+  #   name: Linux
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run build script
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-linux.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_linux_x86-64_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/out.gn/x64.release/*.so'
 
-  build_android_arm_v8:
-    name: Android (arm64-v8a)
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-android-arm-v8.sh $V8_VERSION
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_android_arm64-v8a_${{ env.V8_VERSION }}
-        path: '~/v8/v8/out.gn/arm64.release/*.so'
+  # build_android_arm_v8:
+  #   name: Android (arm64-v8a)
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run build script
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-android-arm-v8.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_android_arm64-v8a_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/out.gn/arm64.release/*.so'
 
-  build_android_arm_v7:
-    name: Android (armeabi-v7a)
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-android-arm-v7.sh $V8_VERSION
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_android_armeabi-v7a_${{ env.V8_VERSION }}
-        path: '~/v8/v8/out.gn/arm.release/*.so'
+  # build_android_arm_v7:
+  #   name: Android (armeabi-v7a)
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run build script
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-android-arm-v7.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_android_armeabi-v7a_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/out.gn/arm.release/*.so'
   
-  build_android_x86_64:
-    name: Android (x86-64)
-    runs-on: ubuntu-18.04
+  # build_android_x86_64:
+  #   name: Android (x86-64)
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run build script
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-android-x86-64.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_android_x86-64_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/out.gn/x64.release/*.so'
+
+  # build_android_x86:
+  #   name: Android (x86)
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run build script
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-android-x86.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_android_x86_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/out.gn/ia32.release/*.so'
+
+  # build_macos:
+  #   name: macOS
+  #   runs-on: macos-10.15
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Run build script
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-macos.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_macos_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/out.gn/x64.release/*.dylib'
+
+  build_windows:
+    name: Windows
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-android-x86-64.sh $V8_VERSION
+        cd %GITHUB_WORKSPACE%
+        v8-windows.cmd %V8_VERSION%
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_android_x86-64_${{ env.V8_VERSION }}
-        path: '~/v8/v8/out.gn/x64.release/*.so'
+        name: v8_windows_${{ env.V8_VERSION }}
+        path: '~/v8/v8/out.gn/x64.release/*.dll'
 
-  build_android_x86:
-    name: Android (x86)
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-android-x86.sh $V8_VERSION
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_android_x86_${{ env.V8_VERSION }}
-        path: '~/v8/v8/out.gn/ia32.release/*.so'
-
-  build_macos:
-    name: macOS
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-macos.sh $V8_VERSION
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_macos_${{ env.V8_VERSION }}
-        path: '~/v8/v8/out.gn/x64.release/*.dylib'
-
-  headers_and_documentation:
-    name: Headers and Documentation
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Generate documentation
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-docs.sh $V8_VERSION
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_headers_${{ env.V8_VERSION }}
-        path: '~/v8/v8/include'
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_documentation_${{ env.V8_VERSION }}
-        path: '~/docs'
-
+  # headers_and_documentation:
+  #   name: Headers and Documentation
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Generate documentation
+  #     run: |
+  #       cd $GITHUB_WORKSPACE
+  #       sh ./v8-docs.sh $V8_VERSION
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_headers_${{ env.V8_VERSION }}
+  #       path: '~/v8/v8/include'
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: v8_documentation_${{ env.V8_VERSION }}
+  #       path: '~/docs'
