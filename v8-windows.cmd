@@ -12,7 +12,7 @@ cd %HOMEPATH%
 echo "=====[ Getting Depot Tools ]====="
 powershell -command "Invoke-WebRequest https://storage.googleapis.com/chrome-infra/depot_tools.zip -O depot_tools.zip"
 7z x depot_tools.zip -o*
-setx PATH %HOMEPATH%\depot_tools;%PATH%
+setx PATH "%HOMEPATH%\depot_tools;%PATH%"
 setx DEPOT_TOOLS_WIN_TOOLCHAIN 0
 gclient
 
@@ -29,11 +29,11 @@ gclient sync
 
 
 echo "=====[ Building V8 ]====="
-python .\tools\dev\v8gen.py x64.release -vv -- '
-target_os = "win"
-is_component_build = true
-v8_enable_i18n_support = false
-symbol_level = 1
+python .\tools\dev\v8gen.py x64.release -vv -- '^
+target_os = "win"^
+is_component_build = true^
+v8_enable_i18n_support = false^
+symbol_level = 1^
 '
 ninja -C out.gn\x64.release -t clean
 ninja -C out.gn\x64.release v8
