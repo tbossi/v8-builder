@@ -102,9 +102,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
+      shell: cmd
       run: |
         cd %GITHUB_WORKSPACE%
-        v8-windows.cmd %V8_VERSION%
+        call .\v8-windows.cmd %V8_VERSION%
     - uses: actions/upload-artifact@v2
       with:
         name: v8_windows_${{ env.V8_VERSION }}
