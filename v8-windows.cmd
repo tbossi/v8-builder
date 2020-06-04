@@ -1,4 +1,3 @@
-@echo off
 set VERSION=%1
 
 git config --global user.name "V8 Windows Builder"
@@ -12,8 +11,8 @@ cd %HOMEPATH%
 echo "=====[ Getting Depot Tools ]====="
 powershell -command "Invoke-WebRequest https://storage.googleapis.com/chrome-infra/depot_tools.zip -O depot_tools.zip"
 7z x depot_tools.zip -o*
-setx PATH "%HOMEPATH%\depot_tools;%PATH%"
-setx DEPOT_TOOLS_WIN_TOOLCHAIN 0
+setx PATH "%HOMEPATH%\depot_tools;%PATH%" /m
+setx DEPOT_TOOLS_WIN_TOOLCHAIN 0 /m
 gclient
 
 
