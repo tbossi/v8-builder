@@ -6,6 +6,8 @@ git config --global core.autocrlf false
 git config --global core.filemode false
 git config --global color.ui true
 
+sc stop "WSearch"
+sc config "WSearch" start= disabled
 
 cd %HOMEPATH%
 echo "=====[ Getting Depot Tools ]====="
