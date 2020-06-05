@@ -6,9 +6,6 @@ git config --global core.autocrlf false
 git config --global core.filemode false
 git config --global color.ui true
 
-sc stop "WSearch"
-sc config "WSearch" start= disabled
-
 cd %HOMEPATH%
 echo "=====[ Getting Depot Tools ]====="
 powershell -command "Invoke-WebRequest https://storage.googleapis.com/chrome-infra/depot_tools.zip -O depot_tools.zip"
@@ -22,11 +19,11 @@ mkdir v8
 cd v8
 
 echo "=====[ Fetching V8 ]====="
-fetch v8
+call fetch v8
 echo "target_os = ['win']" >> .gclient
 cd %HOMEPATH%\v8\v8
 git checkout %VERSION%
-gclient sync
+call gclient sync
 
 
 echo "=====[ Building V8 ]====="
