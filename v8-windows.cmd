@@ -21,7 +21,8 @@ cd v8
 echo "=====[ Fetching V8 ]====="
 call fetch v8
 echo "target_os = ['win']" >> .gclient
-cd %HOMEPATH%\v8\v8
+cd v8
+git fetch
 git checkout %VERSION%
 call gclient sync
 
