@@ -7,10 +7,16 @@ on:
     - 'LICENSE'
     - '**.md'
 
-env:
-  V8_VERSION: 8.1.307.31
-
 jobs:
+
+  version_finder:
+    name: Get version number
+    runs-on: ubuntu-latest
+    outputs:
+      v8_version: ${{ steps.got_version.outputs.version }}
+    steps:
+    - id: got_version
+      run: echo "::set-output name=version::8.1.307.31"
   
   # build_linux:
   #   name: Linux
@@ -99,16 +105,17 @@ jobs:
   build_windows:
     name: Windows
     runs-on: windows-2019
+    needs: version_finder
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       shell: cmd
       run: |
         cd %GITHUB_WORKSPACE%
-        call .\v8-windows.cmd %V8_VERSION%
+        call .\v8-windows.cmd ${{ needs.version_finder.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_windows_${{ env.V8_VERSION }}
+        name: v8_windows_${{ needs.version_finder.outputs.v8_version }}
         path: '~/v8/v8/out.gn/x64.release/*.dll'
 
   # headers_and_documentation:
