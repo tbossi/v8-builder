@@ -27,16 +27,13 @@ call gclient sync
 
 
 echo =====[ Building V8 ]=====
-setlocal EnableDelayedExpansion
-set settings=target_os="win"^
+echo target_os = "win" > temp.txt
+echo is_component_build = true >> temp.txt
+echo v8_enable_i18n_support = false >> temp.txt
+echo symbol_level=1 >> temp.txt
+set /p SETTINGS=<temp.txt
 
-is_component_build=true^
-
-v8_enable_i18n_support=false^
-
-symbol_level=1
-
-call python .\tools\dev\v8gen.py x64.release -vv -- !settings!
+call python .\tools\dev\v8gen.py x64.release -vv -- %SETTINGS%
 
 call ninja -C out.gn\x64.release -t clean
 call ninja -C out.gn\x64.release v8
