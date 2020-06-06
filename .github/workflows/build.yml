@@ -9,6 +9,7 @@ on:
 
 jobs:
 
+# version=8.1.307.31
   version_finder:
     name: Get version number
     runs-on: ubuntu-latest
@@ -21,7 +22,6 @@ jobs:
         cd $GITHUB_WORKSPACE
         pip install pandas
         version=$(python ./get_version.py)
-  #      version=8.1.307.31
         echo "::set-output name=version::$version"
   
   build_linux:
