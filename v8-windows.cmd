@@ -22,7 +22,7 @@ echo =====[ Fetching V8 ]=====
 call fetch v8
 echo target_os = ['win'] >> .gclient
 cd v8
-git checkout %VERSION%
+call git checkout %VERSION%
 call gclient sync
 
 
