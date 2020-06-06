@@ -27,13 +27,7 @@ call gclient sync
 
 
 echo =====[ Building V8 ]=====
-echo target_os = "win" > temp.txt
-echo is_component_build = true >> temp.txt
-echo v8_enable_i18n_support = false >> temp.txt
-echo symbol_level=1 >> temp.txt
-set /p SETTINGS=<temp.txt
-
-call python .\tools\dev\v8gen.py x64.release -vv -- %SETTINGS%
+call python .\tools\dev\v8gen.py x64.release -vv -- target_os=^"win^" is_component_build=true v8_enable_i18n_support=false symbol_level=1
 
 call ninja -C out.gn\x64.release -t clean
 call ninja -C out.gn\x64.release v8
