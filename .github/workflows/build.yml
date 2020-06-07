@@ -3,14 +3,13 @@ name: Build V8
 on:
   push:
     branches: [ master ]
-    paths-ignore:
-    - 'LICENSE'
-    - '**.md'
+    paths:
+    - 'V8_VERSION'
+    - 'builders/**'
 
 jobs:
 
-# version=8.1.307.31
-  version_finder:
+  version_reader:
     name: Get version number
     runs-on: ubuntu-latest
     outputs:
@@ -20,131 +19,163 @@ jobs:
     - id: got_version
       run: |
         cd $GITHUB_WORKSPACE
-        pip install pandas
-        version=$(python ./get_version.py)
-        echo "::set-output name=version::$version"
+        echo "::set-output name=version::$(<./V8_VERSION)"
   
   build_linux:
     name: Linux
     runs-on: ubuntu-18.04
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-linux.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-linux.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_linux_x86-64_${{ needs.version_finder.outputs.v8_version }}
+        name: linux_x86-64
         path: '~/v8/v8/out.gn/x64.release/*.so'
 
   build_android_arm_v8:
     name: Android (arm64-v8a)
     runs-on: ubuntu-18.04
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-android-arm-v8.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-android-arm-v8.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_android_arm64-v8a_${{ needs.version_finder.outputs.v8_version }}
+        name: android_arm64-v8a
         path: '~/v8/v8/out.gn/arm64.release/*.so'
 
   build_android_arm_v7:
     name: Android (armeabi-v7a)
     runs-on: ubuntu-18.04
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-android-arm-v7.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-android-arm-v7.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_android_armeabi-v7a_${{ needs.version_finder.outputs.v8_version }}
+        name: android_armeabi-v7a
         path: '~/v8/v8/out.gn/arm.release/*.so'
   
   build_android_x86_64:
     name: Android (x86-64)
     runs-on: ubuntu-18.04
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-android-x86-64.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-android-x86-64.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_android_x86-64_${{ needs.version_finder.outputs.v8_version }}
+        name: android_x86-64
         path: '~/v8/v8/out.gn/x64.release/*.so'
 
   build_android_x86:
     name: Android (x86)
     runs-on: ubuntu-18.04
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-android-x86.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-android-x86.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_android_x86_${{ needs.version_finder.outputs.v8_version }}
+        name: android_x86
         path: '~/v8/v8/out.gn/ia32.release/*.so'
 
   build_macos:
     name: macOS
     runs-on: macos-10.15
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-macos.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-macos.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_macos_${{ needs.version_finder.outputs.v8_version }}
+        name: macos
         path: '~/v8/v8/out.gn/x64.release/*.dylib'
 
   build_windows:
     name: Windows
     runs-on: windows-2019
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Run build script
       shell: cmd
       run: |
         cd %GITHUB_WORKSPACE%
-        call .\v8-windows.cmd ${{ needs.version_finder.outputs.v8_version }}
+        call .\builders\v8-windows.cmd ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_windows_${{ needs.version_finder.outputs.v8_version }}
+        name: windows
         path: 'v8/v8/out.gn/x64.release/*.dll'
 
   headers_and_documentation:
     name: Headers and Documentation
     runs-on: ubuntu-18.04
-    needs: version_finder
+    needs: version_reader
     steps:
     - uses: actions/checkout@v2
     - name: Generate documentation
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-docs.sh ${{ needs.version_finder.outputs.v8_version }}
+        sh ./builders/v8-docs.sh ${{ needs.version_reader.outputs.v8_version }}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_headers_${{ needs.version_finder.outputs.v8_version }}
+        name: headers
         path: '~/v8/v8/include'
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_documentation_${{ needs.version_finder.outputs.v8_version }}
+        name: documentation
         path: '~/docs'
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [
+      build_linux, build_android_arm_v8, build_android_arm_v7, build_android_x86_64, build_android_x86,
+      build_macos, build_windows, headers_and_documentation
+    ]
+    steps:
+    - uses: actions/download-artifact@v2
+      path: '~/release'
+    - name: Make zip
+      run: |
+        cd ~
+        zip -r v8_engine.zip release
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ needs.version_reader.outputs.v8_version }}
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ~/v8_engine.zip
+        asset_name: v8_engine_${{ needs.version_reader.outputs.v8_version }}.zip
+        asset_content_type: application/zip

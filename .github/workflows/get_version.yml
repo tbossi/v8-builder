@@ -1,0 +1,31 @@
+name: Build V8
+
+on:
+  schedule:
+  - cron: '0 */12 * * *'
+  push:
+    branches: [ master ]
+    paths:
+    - 'get_version.py'
+
+jobs:
+
+  version_finder:
+    name: Get version number
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        cd $GITHUB_WORKSPACE
+        pip install pandas
+        version=$(python ./get_version.py)
+        if [ $? -eq 0 ]; then 
+          echo version > V8_VERSION
+          git config --global user.name 'V8 version finder'
+          git config --global user.email 'v8_version_finder@localhost'
+          git commit -am "Update V8_VERSION to $version"
+          git push
+        else
+          echo "Failed to retrieve V8 version"
+          exit 1
+        fi
