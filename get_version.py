@@ -6,7 +6,7 @@ csv = csv.dropna()
 csv = csv[csv['channel'] == 'stable']
 versions = csv.v8_version.unique()
 
-if len(versions) == 1:
-	print(versions[0])
-else:
+if len(versions) == 0:
 	sys.exit('Version not found')
+
+print(sorted(versions, key=lambda v: int(v.rsplit('.', 1)[1]), reverse=True)[0])
