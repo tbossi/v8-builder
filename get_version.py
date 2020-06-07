@@ -1,8 +1,7 @@
 import pandas as pd
 
 csv = pd.read_csv('https://omahaproxy.appspot.com/all').filter(items = ['channel', 'v8_version']).dropna()
-csv = csv[csv['channel'] == 'stable']
-versions = csv.v8_version.unique()
+versions = csv[csv['channel'] == 'stable'].v8_version.unique()
 
 if len(versions) == 0:
 	sys.exit('Version not found')
