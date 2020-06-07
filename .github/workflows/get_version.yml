@@ -19,7 +19,8 @@ jobs:
         cd $GITHUB_WORKSPACE
         pip install pandas
         version=$(python ./get_version.py)
-        if [ $? -eq 0 ]; then 
+        if [ $? -eq 0 ]; then
+          git pull
           echo $version > V8_VERSION
           git config --global user.name 'V8 version finder'
           git config --global user.email 'v8_version_finder@localhost'

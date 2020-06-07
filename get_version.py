@@ -1,8 +1,6 @@
 import pandas as pd
 
-csv = pd.read_csv('https://omahaproxy.appspot.com/all')
-csv = csv.filter(items = ['channel', 'v8_version'])
-csv = csv.dropna()
+csv = pd.read_csv('https://omahaproxy.appspot.com/all').filter(items = ['channel', 'v8_version']).dropna()
 csv = csv[csv['channel'] == 'stable']
 versions = csv.v8_version.unique()
 
