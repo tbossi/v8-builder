@@ -6,6 +6,7 @@ on:
     paths:
     - 'V8_VERSION'
     - 'builders/**'
+    - '.github/workflows/build.yml'
 
 jobs:
 
@@ -156,11 +157,10 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        path: '~/release'
+        path: 'v8'
     - name: Make zip
       run: |
-        cd ~
-        zip -r v8_engine.zip release
+        zip -r v8_engine.zip v8
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
