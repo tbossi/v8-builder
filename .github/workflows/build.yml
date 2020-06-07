@@ -155,7 +155,8 @@ jobs:
     ]
     steps:
     - uses: actions/download-artifact@v2
-      path: '~/release'
+      with:
+        path: '~/release'
     - name: Make zip
       run: |
         cd ~

@@ -1,4 +1,4 @@
-name: Build V8
+name: Get latest V8 stable version
 
 on:
   schedule:
