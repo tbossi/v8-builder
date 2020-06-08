@@ -167,8 +167,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ needs.version_reader.outputs.v8_version }}
+        tag_name: ${{ needs.version_reader.outputs.v8_version }}
+        release_name: V8 engine, version ${{ needs.version_reader.outputs.v8_version }}
         draft: false
         prerelease: false
     - name: Upload Release Asset
@@ -177,6 +177,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ~/v8_engine.zip
+        asset_path: v8_engine.zip
         asset_name: v8_engine_${{ needs.version_reader.outputs.v8_version }}.zip
         asset_content_type: application/zip
