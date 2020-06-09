@@ -7,6 +7,7 @@ on:
     branches: [ master ]
     paths:
     - 'get_version.py'
+    - '.github/workflows/get_version.yml'
 
 jobs:
 
@@ -21,9 +22,17 @@ jobs:
         cd $GITHUB_WORKSPACE
         pip install pandas
         version=$(python ./get_version.py)
+        
         if [ $? -eq 0 ]; then
           git pull
           echo $version > V8_VERSION
+          
+          git update-index --refresh
+          if git diff-index --quiet HEAD -- ; then
+            echo "V8 version is already up to date"
+            exit 0
+          fi
+
           git config --global user.name 'V8 version finder'
           git config --global user.email 'v8_version_finder@localhost'
           git commit -am "Update V8_VERSION to $version"
