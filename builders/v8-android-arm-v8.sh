@@ -47,4 +47,5 @@ v8_enable_i18n_support = false
 symbol_level = 0
 '
 ninja -C out.gn/arm64.release -t clean
+ninja -C out.gn/arm64.release v8_libplatform
 ninja -C out.gn/arm64.release v8
