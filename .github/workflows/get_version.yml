@@ -27,8 +27,10 @@ jobs:
           git pull
           echo $version > V8_VERSION
           
-          git update-index --refresh
-          (git diff-index --quiet HEAD --)
+          $(
+            git update-index --refresh
+            git diff-index --quiet HEAD --
+          )
           if [ $? -eq 0 ]; then
             echo "V8 version is already up to date"
             exit 0
