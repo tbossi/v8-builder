@@ -44,8 +44,9 @@ target_cpu = "x86"
 v8_target_cpu = "x86"
 is_component_build = true
 v8_enable_i18n_support = false
-symbol_level = 0
+symbol_level = 1
 '
 ninja -C out.gn/ia32.release -t clean
 ninja -C out.gn/ia32.release v8_libplatform
 ninja -C out.gn/ia32.release v8
+cp ./third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/x86/libc++_shared.so ./out.gn/ia32.release

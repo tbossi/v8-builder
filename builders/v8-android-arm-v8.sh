@@ -44,8 +44,9 @@ target_cpu = "arm64"
 v8_target_cpu = "arm64"
 is_component_build = true
 v8_enable_i18n_support = false
-symbol_level = 0
+symbol_level = 1
 '
 ninja -C out.gn/arm64.release -t clean
 ninja -C out.gn/arm64.release v8_libplatform
 ninja -C out.gn/arm64.release v8
+cp ./third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++_shared.so ./out.gn/arm64.release
