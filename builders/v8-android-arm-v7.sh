@@ -43,6 +43,7 @@ target_os = "android"
 target_cpu = "arm"
 v8_target_cpu = "arm"
 is_component_build = true
+use_custom_libcxx = false
 v8_enable_i18n_support = false
 symbol_level = 1
 '
