@@ -126,7 +126,9 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: windows
-        path: 'v8/v8/out.gn/x64.release/*.dll'
+        path: |
+          v8/v8/out.gn/x64.release/*.dll
+          v8/v8/out.gn/x64.release/*.lib
 
   headers_and_documentation:
     name: Headers and Documentation
