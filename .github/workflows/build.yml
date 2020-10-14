@@ -146,6 +146,10 @@ jobs:
         path: '~/v8/v8/include'
     - uses: actions/upload-artifact@v2
       with:
+        name: license
+        path: '~/v8/v8/LICENSE.v8'
+    - uses: actions/upload-artifact@v2
+      with:
         name: documentation
         path: '~/docs'
 
