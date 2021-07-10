@@ -24,6 +24,7 @@ echo target_os = ['win'] >> .gclient
 cd v8
 call git checkout %VERSION%
 call gclient sync
+call git apply --verbose %GITHUB_WORKSPACE%\builders\BUILD.gn.patch
 
 
 echo =====[ Building V8 ]=====
