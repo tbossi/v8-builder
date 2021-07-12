@@ -44,8 +44,7 @@ target_cpu = "x64"
 v8_target_cpu = "x64"
 is_component_build = true
 use_custom_libcxx = false
-v8_enable_i18n_support = false
-v8_use_snapshot = false
+v8_enable_i18n_support = true
 v8_use_external_startup_data = false
 symbol_level = 1
 '
