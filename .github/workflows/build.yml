@@ -35,7 +35,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: linux_x86-64
-        path: '~/v8/v8/out.gn/x64.release/'
+        path: |
+          ~/v8/v8/out.gn/x64.release/*.so
+          ~/v8/v8/out.gn/x64.release/*.dat
+          ~/v8/v8/out.gn/x64.release/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/x64.release/gen-regexp-special-case
+          ~/v8/v8/out.gn/x64.release/mksnapshot
+          ~/v8/v8/out.gn/x64.release/torque
 
   build_android_arm_v8:
     name: Android (arm64-v8a)
@@ -50,7 +56,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: android_arm64-v8a
-        path: '~/v8/v8/out.gn/arm64.release/'
+        path: |
+          ~/v8/v8/out.gn/arm64.release/*.so
+          ~/v8/v8/out.gn/arm64.release/*.dat
+          ~/v8/v8/out.gn/arm64.release/clang_*/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/arm64.release/clang_*/gen-regexp-special-case
+          ~/v8/v8/out.gn/arm64.release/clang_*/mksnapshot
+          ~/v8/v8/out.gn/arm64.release/clang_*/torque
 
   build_android_arm_v7:
     name: Android (armeabi-v7a)
@@ -65,7 +77,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: android_armeabi-v7a
-        path: '~/v8/v8/out.gn/arm.release/'
+        path: |
+          ~/v8/v8/out.gn/arm.release/*.so
+          ~/v8/v8/out.gn/arm.release/*.dat
+          ~/v8/v8/out.gn/arm.release/clang_*/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/arm.release/clang_*/gen-regexp-special-case
+          ~/v8/v8/out.gn/arm.release/clang_*/mksnapshot
+          ~/v8/v8/out.gn/arm.release/clang_*/torque
   
   build_android_x86_64:
     name: Android (x86-64)
@@ -80,7 +98,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: android_x86-64
-        path: '~/v8/v8/out.gn/x64.release/'
+        path: |
+          ~/v8/v8/out.gn/x64.release/*.so
+          ~/v8/v8/out.gn/x64.release/*.dat
+          ~/v8/v8/out.gn/x64.release/clang_*/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/x64.release/clang_*/gen-regexp-special-case
+          ~/v8/v8/out.gn/x64.release/clang_*/mksnapshot
+          ~/v8/v8/out.gn/x64.release/clang_*/torque
 
   build_android_x86:
     name: Android (x86)
@@ -95,7 +119,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: android_x86
-        path: '~/v8/v8/out.gn/ia32.release/'
+        path: |
+          ~/v8/v8/out.gn/ia32.release/*.so
+          ~/v8/v8/out.gn/ia32.release/*.dat
+          ~/v8/v8/out.gn/ia32.release/clang_*/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/ia32.release/clang_*/gen-regexp-special-case
+          ~/v8/v8/out.gn/ia32.release/clang_*/mksnapshot
+          ~/v8/v8/out.gn/ia32.release/clang_*/torque
 
   build_macos:
     name: macOS
@@ -110,7 +140,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: macos
-        path: '~/v8/v8/out.gn/x64.release/'
+        path: |
+          ~/v8/v8/out.gn/x64.release/*.dylib
+          ~/v8/v8/out.gn/x64.release/*.dat
+          ~/v8/v8/out.gn/x64.release/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/x64.release/gen-regexp-special-case
+          ~/v8/v8/out.gn/x64.release/mksnapshot
+          ~/v8/v8/out.gn/x64.release/torque
 
   build_windows:
     name: Windows
@@ -126,7 +162,14 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: windows
-        path: 'v8/v8/out.gn/x64.release/'
+        path: |
+          v8/v8/out.gn/x64.release/*.dll
+          v8/v8/out.gn/x64.release/*.pdb
+          v8/v8/out.gn/x64.release/*.lib
+          v8/v8/out.gn/x64.release/*.exp
+          v8/v8/out.gn/x64.release/*.ilk
+          v8/v8/out.gn/x64.release/*.exe
+          v8/v8/out.gn/x64.release/*.dat
 
   headers_and_documentation:
     name: Headers and Documentation
