@@ -50,6 +50,5 @@ v8_static_library = true
 v8_monolithic = true
 '
 ninja -C out.gn/ia32.release -t clean
-ninja -C out.gn/ia32.release v8_libplatform
-ninja -C out.gn/ia32.release v8
+ninja -C out.gn/ia32.release
 cp ./third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/x86/libc++_shared.so ./out.gn/ia32.release

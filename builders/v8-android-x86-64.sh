@@ -3,6 +3,7 @@ VERSION=$1
 sudo apt-get install -y \
     pkg-config \
     git \
+    tree \
     subversion \
     curl \
     wget \
@@ -50,6 +51,6 @@ v8_static_library = true
 v8_monolithic = true
 '
 ninja -C out.gn/x64.release -t clean
-ninja -C out.gn/x64.release v8_libplatform
-ninja -C out.gn/x64.release v8
+ninja -C out.gn/x64.release
+tree -L 4
 cp ./third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/x86_64/libc++_shared.so ./out.gn/x64.release
