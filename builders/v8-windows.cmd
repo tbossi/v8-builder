@@ -28,7 +28,7 @@ call git apply --ignore-whitespace --verbose %GITHUB_WORKSPACE%\builders\BUILD.g
 
 
 echo =====[ Building V8 ]=====
-call python .\tools\dev\v8gen.py x64.release -vv -- target_os="""win""" is_component_build=true use_custom_libcxx=false is_clang=true use_lld=false v8_enable_verify_heap=false v8_enable_i18n_support=true v8_use_external_startup_data=false symbol_level=0
+call python3 .\tools\dev\v8gen.py x64.release -vv -- target_os="""win""" is_component_build=true use_custom_libcxx=false is_clang=true use_lld=false v8_enable_verify_heap=false v8_enable_i18n_support=true v8_use_external_startup_data=false symbol_level=0
 
 call ninja -C out.gn\x64.release -t clean
 call ninja -C out.gn\x64.release v8

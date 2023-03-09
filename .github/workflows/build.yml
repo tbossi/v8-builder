@@ -123,7 +123,7 @@ jobs:
 
   build_macos:
     name: macOS
-    runs-on: macos-10.15
+    runs-on: macos-12
     needs: version_reader
     steps:
     - uses: actions/checkout@v2
