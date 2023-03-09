@@ -2,7 +2,6 @@ name: Build V8
 
 on:
   push:
-    branches: [ master ]
     paths:
     - 'V8_VERSION'
     - 'builders/**'
@@ -195,6 +194,9 @@ jobs:
 
   release:
     name: Release
+    if: >-
+      startsWith(github.event.head_commit.message, '[Release]') &&
+      github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: [
       version_reader,
