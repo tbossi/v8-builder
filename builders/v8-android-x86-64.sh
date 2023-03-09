@@ -41,9 +41,9 @@ python3 ./tools/dev/v8gen.py x64.release -vv -- '
 target_os = "android"
 target_cpu = "x64"
 v8_target_cpu = "x64"
-is_component_build = true
+is_component_build = false
 use_custom_libcxx = false
-v8_enable_i18n_support = true
+v8_enable_i18n_support = false
 v8_use_external_startup_data = false
 symbol_level = 1
 v8_static_library = true
