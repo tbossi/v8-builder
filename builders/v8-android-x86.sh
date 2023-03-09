@@ -45,7 +45,7 @@ is_component_build = false
 use_custom_libcxx = false
 v8_enable_i18n_support = false
 v8_use_external_startup_data = false
-symbol_level = 1
+v8_symbol_level = 0
 v8_static_library = true
 v8_monolithic = true
 '
