@@ -37,4 +37,4 @@ v8_static_library = true
 v8_monolithic = true
 '
 ninja -C out.gn/x64.release -t clean
-ninja -C out.gn/x64.release
+ninja -C out.gn/x64.release v8_monolith

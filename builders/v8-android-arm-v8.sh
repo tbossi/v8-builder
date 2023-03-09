@@ -51,5 +51,5 @@ v8_static_library = true
 v8_monolithic = true
 '
 ninja -C out.gn/arm64.release -t clean
-ninja -C out.gn/arm64.release
+ninja -C out.gn/arm64.release v8_monolith
 cp ./third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/arm64-v8a/libc++_shared.so ./out.gn/arm64.release

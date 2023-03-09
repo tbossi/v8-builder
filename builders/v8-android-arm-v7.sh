@@ -50,5 +50,5 @@ v8_static_library = true
 v8_monolithic = true
 '
 ninja -C out.gn/arm.release -t clean
-ninja -C out.gn/arm.release
+ninja -C out.gn/arm.release v8_monolith
 cp ./third_party/android_ndk/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_shared.so ./out.gn/arm.release
