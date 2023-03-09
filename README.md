@@ -37,4 +37,4 @@ V8 binaries are built for the following platforms:
 Headers and documentation are included!
 
 ## Releases
-See [release](https://github.com/tbossi/v8-builder/releases) for available versions to download.
+See [release](https://github.com/htynkn/v8-builder/releases) for available versions to download.
