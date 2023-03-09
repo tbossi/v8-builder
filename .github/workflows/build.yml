@@ -57,8 +57,7 @@ jobs:
       with:
         name: android_arm64-v8a
         path: |
-          ~/v8/v8/out.gn/arm64.release/*.so
-          ~/v8/v8/out.gn/arm64.release/*.dat
+          ~/v8/v8/out.gn/arm64.release/*
           ~/v8/v8/out.gn/arm64.release/clang_*/bytecode_builtins_list_generator
           ~/v8/v8/out.gn/arm64.release/clang_*/gen-regexp-special-case
           ~/v8/v8/out.gn/arm64.release/clang_*/mksnapshot
