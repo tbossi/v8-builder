@@ -161,13 +161,13 @@ jobs:
       with:
         name: windows
         path: |
-          v8/v8/out.gn/x64.release/*.dll
-          v8/v8/out.gn/x64.release/*.pdb
-          v8/v8/out.gn/x64.release/*.lib
-          v8/v8/out.gn/x64.release/*.exp
-          v8/v8/out.gn/x64.release/*.ilk
-          v8/v8/out.gn/x64.release/*.exe
-          v8/v8/out.gn/x64.release/*.dat
+          v8/v8/out.gn/x64.release/obj/*.dll
+          v8/v8/out.gn/x64.release/obj/*.pdb
+          v8/v8/out.gn/x64.release/obj/*.lib
+          v8/v8/out.gn/x64.release/obj/*.exp
+          v8/v8/out.gn/x64.release/obj/*.ilk
+          v8/v8/out.gn/x64.release/obj/*.exe
+          v8/v8/out.gn/x64.release/obj/*.dat
 
   headers_and_documentation:
     name: Headers and Documentation
