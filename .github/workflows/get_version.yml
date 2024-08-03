@@ -40,3 +40,4 @@ jobs:
           echo "Failed to retrieve V8 version"
           exit 1
         fi
+        
